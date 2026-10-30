@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://www.youtube.com/game_api/v1"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Daily Slide</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="boot" class="screen"><div class="boot-title">Daily Slide</div></div>
+  <div id="hud" class="panel hidden">
+    <div class="stat"><span class="lbl" id="v-modelbl"></span><span class="val" id="v-mode"></span></div>
+    <div class="stat"><span class="lbl" data-i18n="moves"></span><span class="val" id="v-moves">0</span></div>
+    <div class="stat"><span class="lbl" data-i18n="time"></span><span class="val" id="v-time">0:00</span></div>
+    <div class="stat"><span class="lbl" data-i18n="par"></span><span class="val" id="v-par">0</span></div>
+  </div>
+  <div id="boardwrap" class="hidden"><canvas id="board" tabindex="0" role="application"></canvas></div>
+  <div id="tools" class="panel hidden">
+    <button type="button" id="b-undo" data-i18n="undo"></button>
+    <button type="button" id="b-peek" data-i18n="peek" aria-pressed="false"></button>
+    <button type="button" id="b-nums" data-i18n="numbersShort" aria-pressed="true"></button>
+    <button type="button" id="b-menu" data-i18n="menu"></button>
+  </div>
+  <div id="menu" class="screen hidden">
+    <div class="menu-inner">
+      <h1 data-i18n="appTitle"></h1>
+      <p class="tag" data-i18n="tagline"></p>
+      <p class="streakline" id="m-streak"></p>
+      <button type="button" id="m-today" class="primary"><span id="m-today-main"></span><span id="m-today-sub" class="sub"></span></button>
+      <div class="practice-row"><span id="m-practice-lbl"></span>
+        <button type="button" class="size-btn" data-size="3"></button>
+        <button type="button" class="size-btn" data-size="4"></button>
+        <button type="button" class="size-btn" data-size="5"></button>
+      </div>
+      <button type="button" id="m-stats" data-i18n="stats"></button>
+      <p class="note" id="m-note"></p>
+    </div>
+  </div>
+  <div id="modal" class="screen hidden"><div class="box" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-box"></div></div>
+  <div id="live" class="sr" aria-live="polite"></div>
+</div>
+<script src="sdk.js"></script>
+<script src="strings.js"></script>
+<script src="logic.js"></script>
+<script src="save.js"></script>
+<script src="audio.js"></script>
+<script src="art.js"></script>
+<script src="ui.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
