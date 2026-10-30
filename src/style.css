@@ -1,0 +1,51 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;background:#12121f;color:#f2f3ff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;touch-action:none}
+#app{position:fixed;left:0;top:0;right:0;bottom:0;overflow:hidden;--s:1;font-size:calc(14px*var(--s))}
+.hidden{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.screen{position:absolute;left:0;top:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center}
+#boot{background:#12121f}.boot-title{font-size:calc(28px*var(--s));font-weight:800;letter-spacing:.02em;color:#ffd24a}
+.panel{position:absolute;display:grid;gap:6px;align-content:center}
+.stat{background:#1f2140;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px 4px;min-width:0;overflow:hidden}
+.stat .lbl{font-size:.78em;color:#b9bcd9;line-height:1.1;white-space:nowrap}
+.stat .val{font-size:1.25em;font-weight:700;line-height:1.15;white-space:nowrap;font-variant-numeric:tabular-nums}
+button{font:inherit;color:#f2f3ff;background:#2c3060;border:2px solid #4a4f8f;border-radius:10px;min-height:44px;min-width:44px;padding:0 10px;cursor:pointer;touch-action:manipulation;font-weight:600}
+button:hover{background:#363b78}button:active{background:#454b95}
+button:focus-visible,#board:focus-visible{outline:3px solid #ffd24a;outline-offset:2px}
+button[aria-pressed="true"]{background:#454b95;border-color:#ffd24a}
+button:disabled{opacity:.55;cursor:default}
+button.primary{background:#ffd24a;border-color:#ffd24a;color:#1a1a2e}
+button.primary:hover{background:#ffdd75}
+#boardwrap{position:absolute}
+#board{display:block;touch-action:none;border-radius:8px;outline-offset:3px}
+#menu{background:radial-gradient(circle at 50% 30%,#23265a,#12121f 70%)}
+.menu-inner{display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:8px;width:min(440px,94%);max-height:100%;text-align:center;padding:8px}
+.menu-inner h1{flex-basis:100%;margin:0;font-size:2.2em;color:#ffd24a;line-height:1.1}
+.menu-inner .tag{flex-basis:100%;margin:0;color:#c9cbe6}
+.menu-inner .streakline{flex-basis:100%;margin:0;font-weight:600}
+.menu-inner .note{flex-basis:100%;margin:0;color:#ffb3a7;font-size:.9em}
+.menu-inner .note:empty,.menu-inner .streakline:empty{display:none}
+#m-today{flex:1 1 100%;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.15em;padding:6px 12px}
+#m-today .sub{font-size:.75em;font-weight:500;opacity:.85}
+.practice-row{flex:1 1 100%;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.practice-row span{font-weight:600}
+.size-btn{min-width:56px}
+#m-stats{flex:1 1 100%}
+@media (max-height:330px){.menu-inner .tag{display:none}.menu-inner h1{font-size:1.6em}#m-today{min-height:48px;flex-basis:100%}.practice-row,#m-stats{flex-basis:48%}}
+#modal{background:rgba(8,8,20,.78)}
+.box{background:#1b1e44;border:2px solid #4a4f8f;border-radius:16px;padding:14px 16px;width:min(420px,94%);max-height:96%;overflow:auto;text-align:center;display:flex;flex-direction:column;gap:8px;touch-action:pan-y}
+.box h2{margin:0;font-size:1.5em;color:#ffd24a}
+.box .stars{font-size:2.4em;letter-spacing:.1em;color:#ffd24a;line-height:1.1}
+.box .stars .off{color:#4a4f8f}
+.box .line{margin:0;color:#e4e5f7}
+.box .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.box .btns button{flex:1 1 140px}
+.grid2{display:grid;grid-template-columns:1fr auto;gap:6px 14px;text-align:left}
+.grid2 b{text-align:right;font-variant-numeric:tabular-nums}
+.panel button{padding:0 3px;font-size:.92em}
+.menu-inner{overflow:auto}
+@media (max-height:260px){.menu-inner h1,.menu-inner .streakline{display:none}}
+@media (max-width:300px){.practice-row span{display:none}}
+#app.scroll{overflow-x:auto;overflow-y:auto;touch-action:pan-x pan-y;overscroll-behavior:none}
+#menu{overflow:auto;align-items:flex-start;justify-content:flex-start;touch-action:pan-y}
+.menu-inner{margin:auto;max-height:none;overflow:visible}

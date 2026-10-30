@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Daily Slide - nine aspect ratio preview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;padding:14px;background:#0d0d18;color:#e9eaf7;font:14px system-ui,sans-serif}
+h1{font-size:18px;margin:0 0 6px}p{margin:4px 0 10px;color:#b9bcd9;max-width:70em}
+.bar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:8px 0 14px}
+.grid{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.cell{display:flex;flex-direction:column;gap:4px}
+.cap{font-weight:600}.sub{color:#9da0c4;font-size:12px}
+.frame{background:#000;border:1px solid #4a4f8f;overflow:hidden;position:relative}
+.frame iframe{border:0;position:absolute;left:0;top:0;transform-origin:0 0}
+label{display:flex;gap:6px;align-items:center}
+input[type=range]{width:200px}
+button{font:inherit;padding:6px 10px}
+</style></head><body>
+<h1>Daily Slide: all nine aspect ratios</h1>
+<p>Each frame loads <code>../src/index.html</code> at a real size (shown under it) and is only scaled down to fit this page. Every frame is a live game: play it. They all run the same code, so progress saved in one frame is not shared with the others (outside YouTube, saves live in memory only). Open this file from the project folder (<code>tools/preview.html</code>) so the relative path resolves.</p>
+<div class="bar">
+  <label>Short side of each game (CSS px): <input id="short" type="range" min="240" max="720" step="20" value="360"><b id="shortv">360</b></label>
+  <label>Display scale: <input id="scale" type="range" min="20" max="100" step="5" value="55"><b id="scalev">55%</b></label>
+  <button id="reload">Reload all</button>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+var RATIOS = [[9,32],[9,21],[9,16],[3,4],[1,1],[4,3],[16,9],[21,9],[32,9]];
+var grid = document.getElementById('grid'), shortEl = document.getElementById('short'), scaleEl = document.getElementById('scale'), cells = [];
+RATIOS.forEach(function (r) {
+  var c = document.createElement('div'); c.className = 'cell';
+  var cap = document.createElement('div'); cap.className = 'cap'; cap.textContent = r[0] + ':' + r[1];
+  var fr = document.createElement('div'); fr.className = 'frame';
+  var f = document.createElement('iframe'); f.src = '../src/index.html'; f.title = 'Daily Slide at ' + r[0] + ':' + r[1];
+  var sub = document.createElement('div'); sub.className = 'sub';
+  fr.appendChild(f); c.appendChild(cap); c.appendChild(fr); c.appendChild(sub); grid.appendChild(c);
+  cells.push({ r: r, fr: fr, f: f, sub: sub });
+});
+function apply() {
+  var s = +shortEl.value, k = +scaleEl.value / 100;
+  document.getElementById('shortv').textContent = s; document.getElementById('scalev').textContent = scaleEl.value + '%';
+  cells.forEach(function (c) {
+    var a = c.r[0], b = c.r[1], w = a >= b ? Math.round(s * a / b) : s, h = a >= b ? s : Math.round(s * b / a);
+    c.f.style.width = w + 'px'; c.f.style.height = h + 'px'; c.f.style.transform = 'scale(' + k + ')';
+    c.fr.style.width = Math.round(w * k) + 'px'; c.fr.style.height = Math.round(h * k) + 'px';
+    c.sub.textContent = w + ' x ' + h + ' px';
+  });
+}
+shortEl.addEventListener('input', apply); scaleEl.addEventListener('input', apply);
+document.getElementById('reload').addEventListener('click', function () { cells.forEach(function (c) { c.f.src = c.f.src; }); });
+apply();
+</script></body></html>
